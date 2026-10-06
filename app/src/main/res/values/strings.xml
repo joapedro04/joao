@@ -18,4 +18,49 @@
     <string name="modo_preparo_nao_informado">Modo de preparo não informado.</string>
     <string name="receita_nao_encontrada">Receita não encontrada.</string>
     <string name="voltar">Voltar</string>
+    <string name="compartilhar">Compartilhar receita</string>
+    <string name="compartilhar_via">Compartilhar via</string>
+    <string name="detalhe_erro">Não foi possível carregar a receita. Verifique sua conexão.</string>
+
+    <!-- Estados comuns -->
+    <string name="carregando">Carregando</string>
+    <string name="tentar_novamente">Tentar novamente</string>
+
+    <!-- Busca -->
+    <string name="titulo_busca">Receitas</string>
+    <string name="abrir_salvas">Abrir receitas salvas</string>
+    <string name="nova_receita">Nova receita</string>
+    <string name="buscar_label">Buscar pelo nome</string>
+    <string name="buscar_dica">Nomes em inglês. Ex.: chicken, cake, pasta</string>
+    <string name="busca_vazia">Nenhuma receita encontrada para essa busca.</string>
+    <string name="busca_erro">Não foi possível buscar receitas. Verifique sua conexão.</string>
+    <string name="minha_receita_categoria">Minha receita · %1$s</string>
+
+    <!-- Salvas -->
+    <string name="titulo_salvas">Salvas</string>
+    <string name="secao_minhas_receitas">Minhas receitas</string>
+    <string name="secao_favoritas">Favoritas</string>
+    <string name="salvas_vazio">Você ainda não favoritou nem criou receitas.</string>
+    <string name="nenhuma_favorita">Nenhuma favorita ainda.</string>
+
+    <!-- Nova receita -->
+    <string name="campo_nome">Nome *</string>
+    <string name="campo_categoria">Categoria (opcional)</string>
+    <string name="campo_tempo">Tempo de preparo em minutos *</string>
+    <string name="campo_ingrediente">Ingrediente</string>
+    <string name="campo_modo_preparo">Modo de preparo (opcional)</string>
+    <string name="adicionar_ingrediente">Adicionar ingrediente</string>
+    <string name="remover_ingrediente">Remover %1$s</string>
+    <string name="ajuda_obrigatorio">Obrigatório</string>
+    <string name="ajuda_tempo">Número inteiro, em minutos</string>
+    <string name="ajuda_ingredientes">Adicione pelo menos 1 ingrediente</string>
+    <string name="erro_obrigatorio">Preencha este campo</string>
+    <string name="erro_muito_longo">Texto muito longo</string>
+    <string name="erro_tempo_numerico">Digite apenas números</string>
+    <string name="erro_tempo_intervalo">Digite um tempo entre 1 e %1$d minutos</string>
+    <string name="erro_ingredientes">Adicione pelo menos 1 ingrediente</string>
+    <string name="salvar_receita">Salvar receita</string>
+    <string name="formulario_incompleto">Preencha os campos obrigatórios (*) para salvar.</string>
+    <string name="receita_salva">Receita salva!</string>
+    <string name="ver">Ver</string>
 </resources>
