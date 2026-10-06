@@ -1,6 +1,7 @@
 # Catálogo de versões: todas as dependências e versões ficam num só lugar.
 [versions]
 agp = "9.4.1"
+kotlin = "2.4.20"
 coreKtx = "1.19.1"
 appcompat = "1.8.0"
 material = "1.14.0"
@@ -19,3 +20,4 @@ coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
