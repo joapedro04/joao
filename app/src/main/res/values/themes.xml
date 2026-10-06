@@ -1,4 +1,7 @@
 <resources>
     <!-- Tema Material 3 com claro/escuro automático (DayNight). -->
-    <style name="Theme.Trabalhomobil1" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.Trabalhomobil1" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Fundo claro: ícones escuros na barra de status, senão ficam invisíveis. -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>
