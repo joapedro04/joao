@@ -40,6 +40,13 @@ class DetalheReceitaActivity : AppCompatActivity() {
 
         exibir(atual)
         binding.botaoFavoritar.setOnClickListener { alternarFavorito() }
+
+        // Só adiciona o Fragment na primeira criação; após rotação o FragmentManager já o recria.
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container_ingredientes, IngredientesFragment.newInstance(atual.ingredientes))
+                .commit()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

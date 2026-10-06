@@ -12,6 +12,8 @@
     <string name="favoritar">Favoritar</string>
     <string name="desfavoritar">Remover dos favoritos</string>
     <string name="titulo_ingredientes">Ingredientes</string>
+    <string name="resumo_ingredientes">Toque no que você já tem: %1$d de %2$d</string>
+    <string name="sem_ingredientes">Nenhum ingrediente informado.</string>
     <string name="titulo_modo_preparo">Modo de preparo</string>
     <string name="modo_preparo_nao_informado">Modo de preparo não informado.</string>
     <string name="receita_nao_encontrada">Receita não encontrada.</string>
