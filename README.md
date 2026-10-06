@@ -13,6 +13,22 @@ receita → fechar e reabrir o app → as receitas continuam na tela **Salvas**.
 > - Parcial (Android Views + XML): tag [`parcial-views`](../../tree/parcial-views)
 > - Etapa 2 (Jetpack Compose): tag [`etapa2-compose`](../../tree/etapa2-compose) e branch `main`
 
+## Telas (prints do app rodando no emulador)
+
+| Busca (API) | Detalhe | Salvas (Room) | Validação |
+|---|---|---|---|
+| <img src="docs/prints/01-busca.png" width="200"> | <img src="docs/prints/02-detalhe.png" width="200"> | <img src="docs/prints/03-salvas.png" width="200"> | <img src="docs/prints/04-validacao.png" width="200"> |
+
+| Snackbar de sucesso | Após fechar e reabrir | Erro sem internet | Fonte do sistema no máximo |
+|---|---|---|---|
+| <img src="docs/prints/05-salva.png" width="200"> | <img src="docs/prints/06-depois-de-reabrir.png" width="200"> | <img src="docs/prints/07-erro-offline.png" width="200"> | <img src="docs/prints/08-fonte-maxima.png" width="200"> |
+
+Parcial (Views XML):
+
+| Lista (RecyclerView) | Detalhe (favoritar + chips) |
+|---|---|
+| <img src="docs/prints/parcial-01-lista.png" width="200"> | <img src="docs/prints/parcial-02-detalhe.png" width="200"> |
+
 ## Como rodar
 
 | Item | Versão |
