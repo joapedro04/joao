@@ -2,8 +2,16 @@
 
 ## Objetivo
 
-App para **encontrar receitas, ver os detalhes e separar as favoritas**. Nesta etapa (Parcial),
-os dados são simulados (mock) e as telas são feitas com Android Views (XML).
+App para **encontrar receitas, ver os detalhes, favoritar e cadastrar as suas próprias receitas**.
+As receitas vêm da API pública [TheMealDB](https://www.themealdb.com/api.php). Tudo o que o usuário
+favorita ou cria fica salvo no celular (Room) e continua lá depois de fechar e abrir o app.
+
+**Fluxo completo:** buscar receitas na API → ver a lista → abrir o detalhe → favoritar ou criar uma
+receita → fechar e reabrir o app → as receitas continuam na tela **Salvas**.
+
+> **Etapas no Git**
+> - Parcial (Android Views + XML): tag [`parcial-views`](../../tree/parcial-views)
+> - Etapa 2 (Jetpack Compose): tag [`etapa2-compose`](../../tree/etapa2-compose) e branch `main`
 
 ## Como rodar
 
@@ -11,47 +19,101 @@ os dados são simulados (mock) e as telas são feitas com Android Views (XML).
 |---|---|
 | Android Studio | Rabbit 1 (2026.2.1) ou mais recente |
 | JDK | 17 ou mais recente (o JBR que vem com o Android Studio já serve) |
-| minSdk / targetSdk / compileSdk | 24 / 37 / 37 |
+| minSdk / targetSdk / compileSdk | 24 (Android 7.0) / 37 / 37 |
 | Gradle / AGP / Kotlin | 9.8.0 (wrapper) / 9.4.1 / 2.4.20 |
 
 1. Clone o repositório: `git clone <url-deste-repositório>`
 2. No Android Studio: **File > Open** e escolha a pasta do projeto.
-3. Aguarde o *Gradle Sync* (o Android Studio baixa sozinho o SDK que faltar e cria o `local.properties`).
-4. Escolha um emulador ou celular (Android 7.0+) e clique em **Run**.
+3. Aguarde o *Gradle Sync*. O Android Studio baixa sozinho o SDK que faltar e cria o `local.properties`.
+4. Escolha um emulador ou celular com Android 7.0 ou mais recente e clique em **Run**.
+5. O celular/emulador precisa de **internet** para a primeira busca. Depois disso, as receitas já vistas abrem offline.
 
-Pela linha de comando: `./gradlew assembleDebug` (Windows: `gradlew.bat assembleDebug`).
+Pela linha de comando:
 
-Não há chaves nem senhas no projeto: nada precisa ser configurado.
+```bash
+./gradlew assembleDebug            # gera o APK
+./gradlew testDebugUnitTest        # testes unitários (não precisa de emulador)
+./gradlew connectedDebugAndroidTest  # testes de UI (precisa de emulador/celular conectado)
+```
+
+**Chaves e senhas:** o projeto não usa nenhuma. A URL do TheMealDB contém `1`, que é a chave
+**pública de teste** documentada pelo próprio site. Ela não é um segredo, por isso não há `.env`.
+
+**Dica:** a API tem nomes em inglês. Experimente buscar `chicken`, `cake` ou `pasta`.
 
 ## Bibliotecas externas
 
 | Biblioteca | Para que serve |
 |---|---|
-| AndroidX AppCompat | Base das Activities (`AppCompatActivity`) com compatibilidade para versões antigas do Android. |
-| Material Components | Tema Material 3 e componentes como `MaterialButton`, `Chip` e `ChipGroup`. |
-| AndroidX RecyclerView | Lista eficiente que recicla as linhas ao rolar. |
-| AndroidX Fragment KTX | `Fragment` e `FragmentContainerView` usados na seção de ingredientes. |
-| AndroidX Core KTX | Extensões Kotlin do Android (ex.: `bundleOf`). |
-| Coil 3 (+ coil-network-okhttp) | Baixa e exibe as fotos das receitas em segundo plano, com cache. |
+| Jetpack Compose (BOM) + Material 3 | Toolkit de UI declarativa e componentes Material 3 (TopAppBar, TextField, Snackbar…). |
+| Activity Compose | Liga o Compose à Activity (`setContent`). |
+| Navigation 3 | Navegação entre telas com uma pilha de rotas controlada pelo app (`NavDisplay`). |
+| Lifecycle ViewModel / Runtime Compose | `ViewModel`, `viewModelScope` e `collectAsStateWithLifecycle`. |
+| Lifecycle ViewModel Navigation 3 | Dá a cada tela da pilha seus próprios ViewModels. |
+| Room (+ KSP) | Banco SQLite com consultas verificadas na compilação e retorno em `Flow`. KSP gera o código do Room. |
+| Retrofit + converter kotlinx.serialization | Cliente HTTP que transforma os endpoints da API em funções `suspend`. |
+| kotlinx.serialization | Converte JSON em classes Kotlin e permite salvar as rotas da navegação. |
+| Coil 3 (compose + okhttp) | Baixa e mostra as fotos das receitas, com cache. |
+| JUnit 4, kotlinx-coroutines-test | Testes unitários e controle do tempo virtual nas coroutines (debounce). |
+| Compose UI Test, AndroidX Test | Testes de interface no emulador. |
 
-## Requisitos da Parcial → onde estão
+## Requisitos → onde estão implementados
+
+### Etapa 2 (Compose)
 
 | Requisito | Onde |
 |---|---|
-| Duas telas XML com Views e ViewGroups | `activity_lista_receitas.xml` (LinearLayout + RecyclerView), `activity_detalhe_receita.xml` (FrameLayout, ScrollView, LinearLayout, ImageView, TextView, Space) |
-| Navegação por Intent explícita com dados | `ListaReceitasActivity.abrirDetalhe()` envia o id com `putExtra`; `DetalheReceitaActivity` lê com `getStringExtra` |
-| Receita não encontrada | `DetalheReceitaActivity.mostrarNaoEncontrada()` |
-| ViewBinding (sem findViewById) | `buildFeatures.viewBinding = true` e todas as telas, adapter e fragment |
-| Interação que atualiza a UI | Botão favoritar (ícone + texto) em `DetalheReceitaActivity.alternarFavorito()` |
-| data class imutável e opcionais | `domain/model/Receita.kt`; tratamento com `?.`, `?:` e `let` no adapter e no detalhe |
-| Dados mockados | `data/local/ReceitasMock.kt` |
-| Opcional: componente XML reutilizável | `item_chip_ingrediente.xml`, inflado no `IngredientesFragment` (clique atualiza o contador) |
-| Opcional: Fragment com ViewBinding | `ui/detalhe/IngredientesFragment.kt` (`_binding = null` em `onDestroyView`) |
+| Telas coerentes com o tema | `ui/busca`, `ui/detalhe`, `ui/salvas`, `ui/novareceita` |
+| Navigation 3: rotas, entries, back stack, argumentos | `ui/navigation/Rotas.kt` (`@Serializable` + `NavKey`, `DetalheRota(receitaId)`), `ui/navigation/AppNavegacao.kt` (`rememberNavBackStack`, `NavDisplay`, `entryProvider`, decorators) |
+| LazyColumn com `key` | `BuscaScreen.ListaReceitas`, `SalvasScreen` |
+| Formulário com validação e feedback | `ui/novareceita/NovaReceitaScreen.kt` (`isError`, `supportingText`, botão desabilitado, Snackbar); regras em `domain/validacao/ValidadorReceita.kt` |
+| ViewModel + StateFlow + `collectAsStateWithLifecycle` + fluxo unidirecional | Todos os `*ViewModel.kt` e `*Screen.kt` (a tela chama funções do VM e só recebe estado) |
+| Estados Carregando / Sucesso / Vazio / Erro | `BuscaUiState` (sealed interface) e componentes em `ui/components/Estados.kt` |
+| Estado preservado após rotação | Dados no ViewModel; termo da busca no `SavedStateHandle` (`BuscaViewModel`); pilha salva por `rememberNavBackStack` |
+| Repository | `data/repository/ReceitaRepository.kt` (interface) e `ReceitaRepositoryImpl.kt` (API + Room) |
+| Coroutines, escopo e cancelamento | `viewModelScope`; `Dispatchers.IO` no repository; `debounce` + `flatMapLatest` em `BuscaViewModel` |
+| Persistência local reativa | Room: `data/local/` (tabelas `receitas`, `favoritos`, `buscas_cache`; DAO com `Flow`) |
+| Sem segredos no Git | Não há chaves; `local.properties` no `.gitignore` |
+| Acessibilidade | `contentDescription` em ícones e fotos (`null` nos decorativos), cores do `MaterialTheme`, `IconButton`/`ListItem` com 48dp, textos em `sp` via tipografia, telas com rolagem, títulos marcados com `heading()` |
 
-## Arquitetura (Parcial)
+### Opcionais da Etapa 2
 
-- `domain/model`: modelo `Receita` (data class imutável).
-- `data/local`: `ReceitasMock`, que faz o papel de fonte de dados.
-- `ui/lista` e `ui/detalhe`: Activities, Adapter e Fragment.
+| Opcional | Onde |
+|---|---|
+| DTO → domínio → UI | `data/remote/MealDto.kt` → `data/repository/ReceitaMappers.kt` → `domain/model/Receita.kt` → `ui/components/ReceitaItem.kt` (`ReceitaItemUi`) |
+| Injeção manual de dependências | `di/AppContainer.kt`, criado em `ReceitasApp` |
+| Testes | `app/src/test` (validador, ViewModels com repository fake, cache do repository) e `app/src/androidTest` (UI do formulário e da busca) |
+| Cache com expiração + offline-first | `ReceitaRepositoryImpl.buscar`: o termo buscado há menos de 1 hora sai do banco; sem rede, usa o que estiver salvo |
+| Animações implícitas | `AnimatedContent` entre estados, `animateItem` nas listas, `animateContentSize` e `AnimatedVisibility` no formulário |
+| Telas maiores | `ui/components/Layout.kt` (`larguraDeLeitura`: conteúdo centralizado com largura máxima) |
+| Recurso do celular: compartilhar | `DetalheScreen.compartilhar` (Intent `ACTION_SEND`) |
+| Código seguro | Tamanho máximo nas entradas (`take`), validação antes de salvar, nenhum `Log` com dados do usuário |
 
-Fluxo: `ReceitasMock` → `ReceitaAdapter` (lista) → clique → `Intent` com o id → `DetalheReceitaActivity` busca no mock pelo id.
+### Parcial (tag `parcial-views`)
+
+| Requisito | Onde (na tag) |
+|---|---|
+| Duas telas XML | `ListaReceitasActivity` (RecyclerView) e `DetalheReceitaActivity` |
+| Intent explícita com dados | `putExtra(EXTRA_RECEITA_ID, id)` e busca no mock pelo id, com tela de "não encontrada" |
+| ViewBinding + interação | Botão favoritar alterna ícone e texto |
+| data class e opcionais | `Receita` com `String?`/`Int?` e `?.`, `?:`, `let` |
+| Opcionais | Chip reutilizável inflado com `LayoutInflater` e `IngredientesFragment` com ViewBinding |
+
+## Arquitetura
+
+Camadas (de cima para baixo, cada uma só conhece a de baixo):
+
+```
+ui (Compose + ViewModel)  →  data/repository  →  data/remote (Retrofit)
+                                              →  data/local  (Room)
+domain/model e domain/validacao: modelos e regras em Kotlin puro, usados por todos
+di: AppContainer cria e entrega as dependências
+```
+
+**Fluxo de dados (unidirecional):**
+1. O usuário digita → a tela chama `viewModel.aoMudarTermo(...)` (evento).
+2. O ViewModel espera a digitação parar (`debounce`), chama o repository em `viewModelScope`.
+3. O repository busca na API (em `Dispatchers.IO`), salva no Room e devolve a lista.
+4. O ViewModel publica um novo `UiState` num `StateFlow`; a tela coleta com
+   `collectAsStateWithLifecycle` e se redesenha.
+5. Favoritos e receitas criadas são lidos do Room como `Flow`: quando o banco muda, a tela atualiza sozinha.
