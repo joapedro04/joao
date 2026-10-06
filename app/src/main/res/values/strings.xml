@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Receitas</string>
+
+    <!-- Lista -->
+    <string name="titulo_lista">Receitas</string>
+    <string name="sem_categoria">Sem categoria</string>
+    <string name="tempo_minutos">%1$d min</string>
+    <string name="tempo_nao_informado">Tempo não informado</string>
+
+    <!-- Detalhe -->
+    <string name="foto_da_receita">Foto da receita %1$s</string>
+    <string name="favoritar">Favoritar</string>
+    <string name="desfavoritar">Remover dos favoritos</string>
+    <string name="titulo_ingredientes">Ingredientes</string>
+    <string name="titulo_modo_preparo">Modo de preparo</string>
+    <string name="modo_preparo_nao_informado">Modo de preparo não informado.</string>
+    <string name="receita_nao_encontrada">Receita não encontrada.</string>
+    <string name="voltar">Voltar</string>
 </resources>
