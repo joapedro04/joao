@@ -1,0 +1,9 @@
+# Arquivos gerados e específicos da máquina (não vão para o Git)
+.gradle/
+build/
+/local.properties
+/.idea/
+*.iml
+.DS_Store
+/captures
+.kotlin/
