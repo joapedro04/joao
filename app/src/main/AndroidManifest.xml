@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Necessária para o Coil baixar as fotos das receitas. -->
+    <!-- Necessária para buscar receitas no TheMealDB e baixar as fotos. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- android:name aponta para a Application, que cria o AppContainer (injeção manual). -->
     <application
+        android:name=".ReceitasApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:roundIcon="@drawable/ic_launcher"
@@ -12,20 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trabalhomobil1">
 
-        <!-- Tela inicial do app (aparece no launcher). -->
         <activity
-            android:name=".ui.lista.ListaReceitasActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Só é aberta pela própria app (Intent explícita), por isso exported=false. -->
-        <activity
-            android:name=".ui.detalhe.DetalheReceitaActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

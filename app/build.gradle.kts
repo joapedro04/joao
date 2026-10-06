@@ -23,8 +23,6 @@ android {
 
     buildFeatures {
         compose = true
-        // Gera uma classe de binding para cada layout XML (substitui findViewById).
-        viewBinding = true
     }
 
     compileOptions {
@@ -35,12 +33,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.coil)
-    implementation(libs.coil.network.okhttp)
 
     // Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -49,6 +41,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     // ViewModel + estado ciente do ciclo de vida
     implementation(libs.androidx.lifecycle.runtime.compose)

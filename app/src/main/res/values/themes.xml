@@ -1,4 +1,4 @@
 <resources>
-    <!-- Tema Material 3 com claro/escuro automático (DayNight). -->
-    <style name="Theme.Trabalhomobil1" parent="Theme.Material3.DayNight.NoActionBar" />
+    <!-- Tema só da janela (antes do Compose desenhar). As cores das telas vêm do MaterialTheme em Theme.kt. -->
+    <style name="Theme.Trabalhomobil1" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

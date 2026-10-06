@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Receitas</string>
 
-    <!-- Lista -->
-    <string name="titulo_lista">Receitas</string>
+    <!-- Textos padrão para campos opcionais -->
     <string name="sem_categoria">Sem categoria</string>
     <string name="tempo_minutos">%1$d min</string>
     <string name="tempo_nao_informado">Tempo não informado</string>
@@ -10,9 +9,7 @@
     <!-- Detalhe -->
     <string name="foto_da_receita">Foto da receita %1$s</string>
     <string name="favoritar">Favoritar</string>
-    <string name="desfavoritar">Remover dos favoritos</string>
     <string name="titulo_ingredientes">Ingredientes</string>
-    <string name="resumo_ingredientes">Toque no que você já tem: %1$d de %2$d</string>
     <string name="sem_ingredientes">Nenhum ingrediente informado.</string>
     <string name="titulo_modo_preparo">Modo de preparo</string>
     <string name="modo_preparo_nao_informado">Modo de preparo não informado.</string>
@@ -57,7 +54,7 @@
     <string name="erro_obrigatorio">Preencha este campo</string>
     <string name="erro_muito_longo">Texto muito longo</string>
     <string name="erro_tempo_numerico">Digite apenas números</string>
-    <string name="erro_tempo_intervalo">Digite um tempo entre 1 e %1$d minutos</string>
+    <string name="erro_tempo_intervalo">Digite um valor entre 1 e %1$d</string>
     <string name="erro_ingredientes">Adicione pelo menos 1 ingrediente</string>
     <string name="salvar_receita">Salvar receita</string>
     <string name="formulario_incompleto">Preencha os campos obrigatórios (*) para salvar.</string>
