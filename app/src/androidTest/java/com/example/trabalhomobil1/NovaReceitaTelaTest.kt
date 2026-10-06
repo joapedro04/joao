@@ -32,9 +32,11 @@ class NovaReceitaTelaTest {
 
     @Test
     fun preencherFormularioHabilitaSalvarEMostraSnackbar() {
+        // Criado fora do composable: dentro dele, cada recomposição criaria um ViewModel novo.
+        val viewModel = NovaReceitaViewModel(repository)
         regraCompose.setContent {
             ReceitasTheme {
-                NovaReceitaScreen(NovaReceitaViewModel(repository), aoAbrirReceita = {}, aoVoltar = {})
+                NovaReceitaScreen(viewModel, aoAbrirReceita = {}, aoVoltar = {})
             }
         }
 
@@ -56,9 +58,11 @@ class NovaReceitaTelaTest {
 
     @Test
     fun tempoInvalidoMostraMensagemDeErro() {
+        // Criado fora do composable: dentro dele, cada recomposição criaria um ViewModel novo.
+        val viewModel = NovaReceitaViewModel(repository)
         regraCompose.setContent {
             ReceitasTheme {
-                NovaReceitaScreen(NovaReceitaViewModel(repository), aoAbrirReceita = {}, aoVoltar = {})
+                NovaReceitaScreen(viewModel, aoAbrirReceita = {}, aoVoltar = {})
             }
         }
 
