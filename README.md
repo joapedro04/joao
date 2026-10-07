@@ -1,5 +1,7 @@
 # Receitas — trabalho de Desenvolvimento Android
 
+![Capa do trabalho](docs/capa-trabalho-android.png)
+
 ## Objetivo
 
 App para **encontrar receitas, ver os detalhes, favoritar e cadastrar as suas próprias receitas**.
